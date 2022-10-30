@@ -1,4 +1,4 @@
-import 'package:demo/with_variants.dart';
+import 'package:demo/pages/table_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,6 +10,6 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.purple,
         ),
-        body: const WithVariants());
+        body: const TablePage());
   }
 }

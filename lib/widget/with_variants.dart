@@ -12,13 +12,13 @@ class WithVariants extends StatefulWidget {
 
 class _WithVariantsState extends State<WithVariants> {
   late final List<TextEditingController> countControllor;
-  List<list> users = getUsers();
+  List<list> variant = getVariants();
   String resulttext = "0";
   @override
   void initState() {
     super.initState();
     countControllor =
-        List.generate(users.length, (index) => TextEditingController());
+        List.generate(variant.length, (index) => TextEditingController());
   }
 
   @override
@@ -29,9 +29,9 @@ class _WithVariantsState extends State<WithVariants> {
       child: ListView.builder(
           shrinkWrap: true,
           physics: ScrollPhysics(),
-          itemCount: users.length,
+          itemCount: variant.length,
           itemBuilder: (context, int index) {
-            final user = users[index];
+            final variants = variant[index];
             return Table(
               defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
               border: TableBorder.all(
@@ -43,7 +43,7 @@ class _WithVariantsState extends State<WithVariants> {
                       Column(
                         children: [
                           Text(
-                            user.size,
+                            variants.size,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -51,7 +51,7 @@ class _WithVariantsState extends State<WithVariants> {
                       Column(
                         children: [
                           Text(
-                            user.weight,
+                            variants.weight,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -64,13 +64,12 @@ class _WithVariantsState extends State<WithVariants> {
                             width: 30,
                             child: TextField(
                               keyboardType: TextInputType.number,
-                              controller: countControllor[index],
                               onChanged: (value) {
                                 setState(() {
-                                  int result =
-                                      int.parse(countControllor[index].text) *
-                                          int.parse(user.price);
-                                  resulttext = result.toString();
+                                  int result = int.parse(value) *
+                                      int.parse(variants.price);
+                                  // = result.toString();
+                                  variants.cost = result.toString();
                                 });
                               },
                             ),
@@ -80,7 +79,7 @@ class _WithVariantsState extends State<WithVariants> {
                       Column(
                         children: [
                           Text(
-                            "₹${user.price}",
+                            "₹${variants.price}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -88,7 +87,7 @@ class _WithVariantsState extends State<WithVariants> {
                       Column(
                         children: [
                           Text(
-                            " ₹ ${resulttext}  ",
+                            "${variants.cost}",
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
